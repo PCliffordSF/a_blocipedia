@@ -18,8 +18,9 @@
  gem 'coffee-rails', '~> 4.1.0'
  gem 'jquery-rails'
  gem 'turbolinks'
- gem 'bootstrap'
  gem 'figaro'
+ gem 'bootstrap-sass', '~> 3.3.6'
+ gem 'devise'
  
   group :development do
    gem 'web-console', '~> 2.0'

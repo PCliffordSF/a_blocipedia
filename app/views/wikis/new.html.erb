@@ -1,0 +1,19 @@
+ <h1>Start a New Wiki</h1>
+ 
+ <div class="row">
+   <div class="col-md-8">
+     <%= form_for @wiki do |wiki| %>
+       <div class="form-group">
+         <%= wiki.label :title %>
+         <%= wiki.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
+       </div>
+       <div class="form-group">
+         <%= wiki.label :body %>
+         <%= wiki.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki content" %>
+       </div>
+       <div class="form-group">
+         <%= wiki.submit "Save", class: 'btn btn-success' %>
+       </div>
+     <% end %>
+   </div>
+ </div>

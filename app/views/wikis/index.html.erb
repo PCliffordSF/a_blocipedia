@@ -1,5 +1,27 @@
- <h1>All Wikis</h1>
+ <h1>My Wikis</h1>
  
- <% @posts.each do |post| %>
-   <p><%= link_to wiki.title, wiki_path(wiki.id) %></p>
- <% end %>
+ <div class="row">
+   <div class="col-md-8">
+
+     <% @wikis.each do |wiki| %>
+       <div class="media">
+         <div class="media-body">
+           <h4 class="media-heading">
+
+             <%= link_to wiki.title, wiki %>
+           </h4>
+           <small>
+             <%= wiki.body %> </br>
+           </small>
+           <small>
+             <%= link_to "Edit Wiki", edit_wiki_path(wiki), class: 'btn-xs btn-success' %>
+             <%= link_to "Delete Wiki", wiki, method: :delete, class: 'btn-xs btn-danger', data: { confirm: 'Are you sure you want to delete wiki?' } %>
+  
+           </small>
+         </div>
+       </div>
+     <% end %>
+     </br>
+     <%= link_to "Exit", welcome_index_path, class: 'btn btn-warning' %>
+   </div>
+ </div>

@@ -6,6 +6,7 @@
  group :production do
    gem 'pg'
    gem 'rails_12factor'
+
  end
  
  group :development do
@@ -21,12 +22,15 @@
  gem 'figaro'
  gem 'bootstrap-sass', '~> 3.3.6'
  gem 'devise'
+ gem 'pundit'
+ 
  
   group :development do
    gem 'web-console', '~> 2.0'
  end
 
  group :development, :test do
+   
    gem 'byebug'
    gem 'spring'
    gem 'rspec-rails'

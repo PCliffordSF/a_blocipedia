@@ -6,9 +6,9 @@ RSpec.describe WikisController, type: :controller do
   let(:wiki) {Wiki.create(user: user, title: "title", body: "body") }
 
 
-#  before :each do 
- #   sign_in user 
- # end
+  before :each do 
+    sign_in user 
+  end
   
   context "user user doing CRUD on a wiki they own" do
     

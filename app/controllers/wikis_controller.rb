@@ -1,7 +1,8 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.all
-    render :index
+       @user = current_user
+       @wikis = @user.wikis.all
+       render :index
   end
 
   def new
@@ -10,6 +11,7 @@ class WikisController < ApplicationController
   end
 
    def create
+       
      @wiki = Wiki.new
      @wiki.title = params[:wiki][:title]
      @wiki.body = params[:wiki][:body]

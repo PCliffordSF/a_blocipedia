@@ -1,7 +1,6 @@
 class WikisController < ApplicationController
   def index
-       @user = current_user
-       @wikis = @user.wikis.all
+       @wikis = Wiki.all
        render :index
   end
 

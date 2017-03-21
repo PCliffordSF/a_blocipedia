@@ -1,7 +1,7 @@
 class WikisController < ApplicationController
   def index
-       @wikis = Wiki.all
-       render :index
+    @wikis = Wiki.all
+    render :index
   end
 
   def new
@@ -18,7 +18,7 @@ class WikisController < ApplicationController
 
      if @wiki.save
        flash[:notice] = "The wiki was saved."
-       redirect_to @wiki
+       redirect_to @wiki # wiki_path(@wiki.id)
      else
 
        flash.now[:alert] = "There was an error saving the wiki. Please try again."

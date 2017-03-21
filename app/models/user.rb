@@ -3,9 +3,7 @@ class User < ActiveRecord::Base
   
   after_initialize :init
 
-  def init
-    self.role = 1
-  end
+
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable  , :confirmable
   devise :database_authenticatable, :registerable,
@@ -13,4 +11,10 @@ class User < ActiveRecord::Base
          
          
   enum role: [:guest, :standard, :premium, :admin]
+  
+  def init
+    self.role = 1
+  end
+  
+  
 end

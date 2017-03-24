@@ -16,5 +16,11 @@ class User < ActiveRecord::Base
     self.role = 1
   end
   
+  def upgrate_to_premium
+    if self.role = 1
+     self.role = 2 
+    end
+  end
+  
   
 end

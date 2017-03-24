@@ -13,13 +13,12 @@ class User < ActiveRecord::Base
   enum role: [:guest, :standard, :premium, :admin]
   
   def init
-    self.role = 1
+    self.role = :standard
   end
   
   def upgrate_to_premium
-    if self.role = 1
-     self.role = 2 
-    end
+     self.role = :premium 
+     self.save
   end
   
   

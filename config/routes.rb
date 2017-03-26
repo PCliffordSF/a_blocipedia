@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   
   resources :charges, only: [:new, :create]
+  get '/users/upgrade', :controller => 'users', :action => 'upgrade'
 
   resources :wikis
 

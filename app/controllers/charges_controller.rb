@@ -3,8 +3,8 @@ class ChargesController < ApplicationController
     @stripe_btn_data = {
        key: "#{ Rails.configuration.stripe[:publishable_key] }",
        description: "BigMoney Membership - #{current_user.email}",
-       #amount: Amount.default
-       amount: 1000 
+       amount: Amount.default
+       #amount: 1000 
      }
   end
 
@@ -26,8 +26,7 @@ class ChargesController < ApplicationController
    )
  
    flash[:notice] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
-   current_user.upgrate_to_premium
-   redirect_to root_path # or wherever
+   redirect_to users_upgrade_path, method: :get  # or wherever
    
  
    # Stripe will send back CardErrors, with friendly messages
@@ -37,4 +36,6 @@ class ChargesController < ApplicationController
      flash[:alert] = e.message
      redirect_to new_charge_path
  end
+ 
+
 end

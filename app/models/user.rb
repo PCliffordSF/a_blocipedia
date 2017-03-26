@@ -16,9 +16,21 @@ class User < ActiveRecord::Base
     self.role = :standard
   end
   
-  def upgrate_to_premium
+  def upgrade_to_premium
+     Rails.logger.info  "inside upgrade_to_premium"
+     Rails.logger.info  "------------------------"
      self.role = :premium 
-     self.save
+     Rails.logger.info self.role.inspect
+     Rails.logger.info  "------------------------"
+     if self.save
+        Rails.logger.info  "save worked"
+        Rails.logger.info  "------------------------"
+     else
+         Rails.logger.info  "save didn't work"
+     end
+     Rails.logger.info  "========================"
+     Rails.logger.info self.errors.inspect
+     Rails.logger.info  "========================"
   end
   
   

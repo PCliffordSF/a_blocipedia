@@ -1,0 +1,21 @@
+<p>User Upgrade Page</p>
+<div class="container">
+    <% @user = current_user %>
+
+      <% if current_user.role = 1 %>
+      <p>Your current status is: <%= @user.role %></p>
+      <p>Would you like to upgrade to premium?</p>
+      <div>
+         <%= link_to "Upgrade to Premium?", new_charge_path, class: 'btn btn-success' %>
+      </div>
+          
+      <% end %>
+      
+      <% if current_user.role = 2 %>
+      <p>Your current status is: <%= @user.role %></p>
+
+          
+      <% end %>
+
+
+</div>

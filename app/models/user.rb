@@ -17,23 +17,14 @@ class User < ActiveRecord::Base
   end
   
   def upgrade_to_premium
-     Rails.logger.info  "inside upgrade_to_premium"
-     Rails.logger.info  "------------------------"
      self.role = :premium 
-     Rails.logger.info self.role.inspect
-     Rails.logger.info  "--------self.role.inspect----------------"
-     if self.save
-        Rails.logger.info  "save worked"
-        Rails.logger.info  "------------------------"
-        Rails.logger.info self.reload
-        Rails.logger.info self.reload.role
-        Rails.logger.info  "=======self.reload.role================="
-     else
-         Rails.logger.info  "save didn't work"
-     end
-     Rails.logger.info  "========================"
-     Rails.logger.info self.errors.inspect
-     Rails.logger.info  "========================"
+     self.save
+     self
+  end
+  
+  def downgrade_to_standard
+     self.role = :standard
+     self.save
      self
   end
 end

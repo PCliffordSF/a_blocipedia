@@ -18,7 +18,14 @@
       <div>
          <%= link_to "Upgrade to Premium?", new_charge_path, class: 'btn btn-success' %>
       </div>
-          
+      <% end %>
+      
+      <% if current_user.premium? %>
+      <p>Your current status is: <%= @user.role %></p>
+      <p>Would you like to downgrade to standard?</p>
+      <div>
+         <%= link_to "Downgrade to Standard?", users_downgrade_path, class: 'btn btn-success' %>
+      </div>
       <% end %>
 
     <% else %>

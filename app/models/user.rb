@@ -1,9 +1,13 @@
 class User < ActiveRecord::Base
   has_many :wikis
   
-  after_initialize :init
+  before_create :default_to_standard
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7-chkp
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable  , :confirmable
   devise :database_authenticatable, :registerable,
@@ -12,7 +16,25 @@ class User < ActiveRecord::Base
          
   enum role: [:guest, :standard, :premium, :admin]
   
+<<<<<<< HEAD
   def init
     self.role = :standard
   end
+=======
+  def default_to_standard
+    self.role = :standard
+  end
+  
+  def upgrade_to_premium
+     self.role = :premium 
+     self.save
+     self
+  end
+  
+  def downgrade_to_standard
+     self.role = :standard
+     self.save
+     self
+  end
+>>>>>>> 7-chkp
 end

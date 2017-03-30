@@ -1,21 +1,36 @@
 <div class="container">
     <% @user = current_user %>
     <% if current_user != nil %>
-        <p>Welome to Blocipedia <%= @user.email %></p>
-    
-  <div class="col-md-6">
-    <p>Would you like to create a new Wiki?</p>
-     <div>
-       <%= link_to "Create a Wiki", new_wiki_path, class: 'btn btn-success' %>
-     </div>
-     <p>Would you like to view your Wikis?</p>
-    <div>
-       <%= link_to "View all the Wikis", wikis_path, class: 'btn btn-success' %>
-     </div>
-  <div>
-      <% else %>
-    <div class="col-md-4">
-        <p>Would you like to login or sign up?</p>
-    </div>  
+      <p>Welome to Blocipedia <%= @user.email %></p>
+      
+      <div class="col-md-8">
+        <p>Would you like to create a new Wiki?</p>
+      <div>
+        <%= link_to "Create a Wiki", new_wiki_path, class: 'btn btn-success' %>
+      </div>
+      <p>Would you like to view your Wikis?</p>
+      <div>
+         <%= link_to "View all the Wikis", wikis_path, class: 'btn btn-success' %>
+      </div>
+      <% if current_user.standard? %>
+      <p>Your current status is: <%= @user.role %></p>
+      <p>Would you like to upgrade to premium?</p>
+      <div>
+         <%= link_to "Upgrade to Premium?", new_charge_path, class: 'btn btn-success' %>
+      </div>
       <% end %>
+      
+      <% if current_user.premium? %>
+      <p>Your current status is: <%= @user.role %></p>
+      <p>Would you like to downgrade to standard?</p>
+      <div>
+         <%= link_to "Downgrade to Standard?", users_downgrade_path, class: 'btn btn-success' %>
+      </div>
+      <% end %>
+
+    <% else %>
+      <div class="col-md-6">
+        <p>Would you like to login or sign up?</p>
+      </div>  
+    <% end %>
 </div>

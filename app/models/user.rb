@@ -16,11 +16,7 @@ class User < ActiveRecord::Base
          
   enum role: [:guest, :standard, :premium, :admin]
   
-<<<<<<< HEAD
-  def init
-    self.role = :standard
-  end
-=======
+
   def default_to_standard
     self.role = :standard
   end
@@ -36,5 +32,5 @@ class User < ActiveRecord::Base
      self.save
      self
   end
->>>>>>> 7-chkp
+
 end

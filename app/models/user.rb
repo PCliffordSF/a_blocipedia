@@ -4,10 +4,7 @@ class User < ActiveRecord::Base
   before_create :default_to_standard
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 7-chkp
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable  , :confirmable
   devise :database_authenticatable, :registerable,

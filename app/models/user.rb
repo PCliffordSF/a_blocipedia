@@ -29,5 +29,17 @@ class User < ActiveRecord::Base
      self.save
      self
   end
+  
+def downgrade_users_wikis
+    user_id = current_user.id
+    @wikis = Wiki.find(:all, 
+        :conditions => ['user_id = user_id'])
+    @wikis.each do |wiki|
+       wiki.private = false
+       wiki.save
+    end
+    redirect_to root_path
+      
+end
 
 end

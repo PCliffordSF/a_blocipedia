@@ -15,7 +15,7 @@
          <%= f.submit "Save", class: 'btn btn-success' %>
          <%= link_to "Exit", root_path, class: 'btn btn-warning' %>
        </div>
-      
+      <%= render partial: 'form', locals: {f: f, current_user: current_user} %>
      <% end %>
    </div>
  </div>

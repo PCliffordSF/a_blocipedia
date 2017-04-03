@@ -8,6 +8,6 @@ def upgrade
  
  def downgrade
      current_user.downgrade_to_standard
-     current_user.downgrade_users_wikis
+     redirect_to wikis_downgrade_path
  end
 end

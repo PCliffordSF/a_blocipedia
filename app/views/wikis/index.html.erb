@@ -4,6 +4,8 @@
    <div class="col-md-8">
 
      <% @wikis.each do |wiki| %>
+     
+     <% if wiki.private != true || current_user.role == 'premium' %>
        <div class="media">
          <div class="media-body">
            <h4 class="media-heading">
@@ -19,6 +21,7 @@
            </small>
          </div>
        </div>
+       <% end %>
      <% end %>
      </br>
      <%= link_to "Exit", welcome_index_path, class: 'btn btn-warning' %>

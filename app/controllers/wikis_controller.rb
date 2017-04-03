@@ -65,4 +65,8 @@ class WikisController < ApplicationController
      end
   end
   
+  def downgrade
+      downgrade_users_wikis
+  end
+  
 end

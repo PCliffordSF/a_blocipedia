@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
+  
   has_many :wikis
+  has_many :collaborators, through: :wikis
   
   before_create :default_to_standard
 

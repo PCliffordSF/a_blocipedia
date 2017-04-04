@@ -7,10 +7,16 @@
  <div class="row">
    <div class="col-md-8">
      <p><%= @wiki.body %></p>
+     <% if @wiki.private == true && current_user.premium? %>
+     <div class="col-md-8">
+      <%= link_to "Add Collaborator to Wiki", users_standard_path, class: 'btn btn-success' %>
+      </div> <br></br>
+     <% end %>
    </div>
      <div class="col-md-8">
        <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-success' %>
        <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete wiki?' } %>
        <%= link_to "Exit", root_path, class: 'btn btn-warning' %>
      </div>
+     
  </div>

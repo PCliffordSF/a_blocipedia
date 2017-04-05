@@ -11,11 +11,10 @@ def upgrade
      redirect_to root_path
  end
  
- def standard_user
-    Rails.logger.info "standard_user method"  
-    Rails.logger.info "standard_user method"  
-    Rails.logger.info "standard_user method" 
-    render :standard
-    
- end
+  def standard_user
+#     $standard_users = User.standard_users
+     render :standard
+  end
+  
+
 end

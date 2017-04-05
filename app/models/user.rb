@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
      self
   end
   
+  def standard_users
+    User.where(role: [1])
+  end
+  
 
 
 end

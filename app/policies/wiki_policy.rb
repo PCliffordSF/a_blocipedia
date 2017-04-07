@@ -1,6 +1,9 @@
 class WikiPolicy < ApplicationPolicy
     attr_reader :user, :record
     
+    
+        
+    
   class Scope
      attr_reader :user, :scope
  

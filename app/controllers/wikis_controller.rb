@@ -70,4 +70,6 @@ class WikisController < ApplicationController
       downgrade_users_wikis
   end
   
+
+  
 end

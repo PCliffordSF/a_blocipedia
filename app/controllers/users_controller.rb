@@ -11,10 +11,12 @@ def upgrade
      redirect_to root_path
  end
  
-  def standard_user
-#     $standard_users = User.standard_users
-     render :standard
-  end
-  
+ def add_collaborator
+    @user = User.new
+    @wiki = Wiki.find(params[:wiki_id])
+    Rails.logger.info "Inside add_collaborator"
+    render :add_collaborator
+ end
+ 
 
 end

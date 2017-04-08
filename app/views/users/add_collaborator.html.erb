@@ -1,0 +1,14 @@
+ <div class="row">
+   <div class="col-md-8">
+     <%= form_for @user do |user| %>
+       <div class="form-group">
+         <p>Enter the email address of the standard user you would like to add as a collaborator</p>
+         <%= user.email_field :email, class: 'form-control', placeholder: "Enter email address" %>
+       </div>
+       <div class="form-group">
+         <%= link_to search_user, class: 'btn btn-success' %>
+         <%= link_to "Exit", root_path, class: 'btn btn-warning' %>
+       </div>
+     <% end %>
+   </div>
+ </div>

@@ -10,8 +10,11 @@
      <% if @wiki.private == true && current_user.premium? %>
      
      <div class="col-md-8">
-      <%= email_field :email, class: 'form-control', placeholder: "Enter email address" %>
-      <%= link_to "Add Collaborator to Wiki", wikis_add_collaborator_path(:wiki_id => @wiki.id, :email => @email), class: 'btn btn-success' %>
+      <%= form_for @wiki, :url => url_for(:controller => 'wikis', :action => 'tester') do |f| %>
+      <%= email_field 'email', class: 'form-control', placeholder: "Enter email address" %>
+      <%= f.submit 'Tester Action', class: 'btn btn-success' %>
+      <% end %>
+
       <br></br>
       </div> <br></br>
      <% end %>

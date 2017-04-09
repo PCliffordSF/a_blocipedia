@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/users/upgrade', :controller => 'users', :action => 'upgrade'
   get '/users/downgrade', :controller => 'users', :action => 'downgrade'
   get '/wikis/add_collaborator', :controller => 'wikis', :action => 'add_collaborator'
-  get '/wikis/find_collaborator', :controller => 'wikis', :action => 'find_collaborator'
+  get '/wikis/tester', :controller => 'wikis', :action => 'tester'
 
 
   resources :wikis

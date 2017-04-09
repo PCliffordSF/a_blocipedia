@@ -78,6 +78,11 @@ class WikisController < ApplicationController
     redirect_to root_path
  end
  
+ def tester
+    Rails.logger.info "inside tester"
+    redirect_to root_path
+ end
+ 
 
   
 end

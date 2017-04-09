@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :charges, only: [:new, :create]
   get '/users/upgrade', :controller => 'users', :action => 'upgrade'
   get '/users/downgrade', :controller => 'users', :action => 'downgrade'
-  get '/users/add_collaborator', :controller => 'users', :action => 'add_collaborator'
+  get '/wikis/add_collaborator', :controller => 'wikis', :action => 'add_collaborator'
+  get '/wikis/find_collaborator', :controller => 'wikis', :action => 'find_collaborator'
 
 
   resources :wikis

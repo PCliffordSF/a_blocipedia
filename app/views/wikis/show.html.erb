@@ -10,7 +10,8 @@
      <% if @wiki.private == true && current_user.premium? %>
      
      <div class="col-md-8">
-      <%= link_to "Add Collaborator to Wiki", users_add_collaborator_path(:wiki_id => @wiki.id), class: 'btn btn-success' %>
+      <%= email_field :email, class: 'form-control', placeholder: "Enter email address" %>
+      <%= link_to "Add Collaborator to Wiki", wikis_add_collaborator_path(:wiki_id => @wiki.id, :email => @email), class: 'btn btn-success' %>
       <br></br>
       </div> <br></br>
      <% end %>

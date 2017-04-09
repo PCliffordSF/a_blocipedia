@@ -52,7 +52,6 @@ class WikisController < ApplicationController
        flash.now[:alert] = "There was an error saving the wiki. Please try again."
        render :edit
      end
-     
   end
 
   def destroy
@@ -70,6 +69,15 @@ class WikisController < ApplicationController
       downgrade_users_wikis
   end
   
+ def add_collaborator
+    @wiki = Wiki.find(params[:wiki_id])
+    @user = User.where("email = :email")
+    Rails.logger.info "inside add collaborator"
+    Rails.logger.info @wiki.title
+    Rails.logger.info params[:email]
+    redirect_to root_path
+ end
+ 
 
   
 end

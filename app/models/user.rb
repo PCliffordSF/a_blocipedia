@@ -27,11 +27,6 @@ class User < ActiveRecord::Base
   def downgrade_to_standard
      self.role = :standard
      self.save
-     Rails.logger.info "logger"
-     Rails.logger.info "=================="
-     Rails.logger.info wikis.length
-     Rails.logger.info "=================="
-     Rails.logger.info "logger"
      wikis.each { |wiki| wiki.make_public }
      self
   end

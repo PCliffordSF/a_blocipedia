@@ -1,8 +1,9 @@
 class WikisController < ApplicationController
     
+
   def index
-    @wikis = Wiki.all
-    render :index
+     @wikis = policy_scope(Wiki)
+     render :index
   end
 
   def new

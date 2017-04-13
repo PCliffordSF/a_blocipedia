@@ -6,8 +6,6 @@
        <div class="form-group">
         <%= wiki.label :title %>
         <%= wiki.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
-        <%= @wiki.title %>
-        <%= markdown(@wiki.title) %>
        </div>
        <div class="form-group">
          <%= wiki.label :body %>

@@ -79,6 +79,7 @@ class WikisController < ApplicationController
         Rails.logger.info @user.email
         Rails.logger.info "You have selected wiki"
         Rails.logger.info @wiki.title
+        
    else
         flash[:alert] = "\"#{params["email"]}\" isn't a valid email address... dummy"
     end

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :wikis
+  has_many :collaborators
+  has_many :collaboratingwikis, through: :collaborators, source: :wiki 
   
   before_create :default_to_standard
 
@@ -26,12 +28,7 @@ class User < ActiveRecord::Base
   
   def downgrade_to_standard
      self.role = :standard
-     self.save
-     Rails.logger.info "logger"
-     Rails.logger.info "=================="
-     Rails.logger.info wikis.length
-     Rails.logger.info "=================="
-     Rails.logger.info "logger"
+     self.saves
      wikis.each { |wiki| wiki.make_public }
      self
   end

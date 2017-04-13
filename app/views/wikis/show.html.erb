@@ -11,11 +11,12 @@
      
      <div class="col-md-8">
       
-      <%= form_for @wiki, :url => url_for(:controller => 'wikis', :action => 'tester') do |f| %>
+      <%= form_tag wikis_add_collaborator_path do  %>
+      <%= @wiki.id %>
+      <%= hidden_field_tag 'wiki_id', @wiki.id %>
+      <%= email_field_tag 'email', class: 'form-control', placeholder: "Enter email address" %>
       
-      <%= email_field 'email', class: 'form-control', placeholder: "Enter email address" %>
-      
-      <%= f.submit 'Tester Action', class: 'btn btn-success' %>
+      <%= submit_tag 'Tester Action', class: 'btn btn-success' %>
       <% end %>
 
       <br></br>

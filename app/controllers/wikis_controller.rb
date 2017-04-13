@@ -41,10 +41,11 @@ class WikisController < ApplicationController
   end
 
   def update
-     authorize @wiki
      @wiki = Wiki.find(params[:id])
+     authorize @wiki
      @wiki.title = params[:wiki][:title]
      @wiki.body = params[:wiki][:body]
+     @wiki.private = params[:wiki][:private]
  
      if @wiki.save
        flash[:notice] = "Post was updated."
@@ -71,18 +72,26 @@ class WikisController < ApplicationController
   end
   
  def add_collaborator
-    @wiki = Wiki.find(params[:wiki_id])
-    @user = User.where("email = :email")
-    Rails.logger.info "inside add collaborator"
-    Rails.logger.info @wiki.title
-    Rails.logger.info params[:email]
+    @wiki = Wiki.find(params["wiki_id"])
+    if User.find_by email: params["email"]
+       @user = User.find_by email: params["email"] 
+        Rails.logger.info "you have selected user"
+        Rails.logger.info @user.email
+        Rails.logger.info "You have selected wiki"
+        Rails.logger.info @wiki.title
+   else
+        flash[:alert] = "\"#{params["email"]}\" isn't a valid email address... dummy"
+    end
+
     redirect_to root_path
  end
  
- def tester
-    Rails.logger.info "inside tester"
-    redirect_to root_path
- end
+#  def tester
+#     Rails.logger.info "inside tester"
+#     Rails.logger.info params["email"] 
+#     Rails.logger.info params["wiki_id"]
+#     redirect_to root_path
+#  end
  
 
   

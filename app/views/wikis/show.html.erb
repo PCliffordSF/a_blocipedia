@@ -11,12 +11,11 @@
      
      <div class="col-md-8">
       
-      <%= form_tag wikis_add_collaborator_path do  %>
-      <%= @wiki.id %>
-      <%= hidden_field_tag 'wiki_id', @wiki.id %>
-      <%= email_field_tag 'email', class: 'form-control', placeholder: "Enter email address" %>
-      
-      <%= submit_tag 'Tester Action', class: 'btn btn-success' %>
+      <%= form_tag add_collaborator_wiki_path(@wiki) do  %>
+      <%= label_tag 'email', 'Add a collaborator to this wiki?' %>
+      <%= email_field_tag 'email', nil, class: 'form-control', placeholder: "Enter email address of collaborator" %>
+      <br></br>
+      <%= submit_tag 'Search for collaborator', class: 'btn btn-primary' %>
       <% end %>
 
       <br></br>

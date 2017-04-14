@@ -72,14 +72,17 @@ class WikisController < ApplicationController
   end
   
  def add_collaborator
-    @wiki = Wiki.find(params["wiki_id"])
-    if User.find_by email: params["email"]
-       @user = User.find_by email: params["email"] 
+    @wiki = Wiki.find(params[:id])
+    @user = User.find_by email: params["email"]
+    #@user = User.where('email = ?', params["email"]).first
+    #@user = User.where(email: params['email']).first
+    if @user
         Rails.logger.info "you have selected user"
         Rails.logger.info @user.email
         Rails.logger.info "You have selected wiki"
         Rails.logger.info @wiki.title
-        
+        @wiki.collaboratingusers << @user
+        @wiki.save
    else
         flash[:alert] = "\"#{params["email"]}\" isn't a valid email address... dummy"
     end

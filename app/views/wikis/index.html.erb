@@ -16,8 +16,12 @@
              <%= wiki.body %> </br>
            </small>
            <small>
+             <% if wiki.private == true %>
+             <small>Private Wiki</small>
+             <% else %>
+             <small>Public Wiki</small>
+             <% end %>
              <%= link_to "Edit Wiki", edit_wiki_path(wiki), class: 'btn-xs btn-success' %>
-  
            </small>
          </div>
        </div>

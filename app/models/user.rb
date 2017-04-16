@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
+  
+  #has_many :goerges, class_name: 'Wiki', foreign_key: :user_id
   has_many :wikis
+  has_many :collaborators
+  has_many :collaboratingwikis, through: :collaborators, source: :wiki 
   
   before_create :default_to_standard
 
@@ -29,6 +33,10 @@ class User < ActiveRecord::Base
      self.save
      wikis.each { |wiki| wiki.make_public }
      self
+  end
+  
+  def standard_users
+    User.where(role: [1])
   end
   
 

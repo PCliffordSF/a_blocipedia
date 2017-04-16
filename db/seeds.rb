@@ -19,7 +19,8 @@
    Wiki.create!(
      user:   users.sample,
      title:  Faker::StarWars.vehicle,
-     body:   Faker::Lorem.paragraph(2, false, 4)
+     body:   Faker::Lorem.paragraph(2, false, 4),
+     role: "standard"
    )
  end
   

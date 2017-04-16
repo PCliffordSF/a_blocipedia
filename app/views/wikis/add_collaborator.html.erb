@@ -1,0 +1,14 @@
+ <div class="row">
+   <div class="col-md-8">
+     <%= form_for @wiki do |wiki| %>
+       <div class="form-group">
+         <p>Enter the email address of the standard user you would like to add as a collaborator</p>
+         <%= email_field :email, class: 'form-control', placeholder: "Enter email address" %>
+         <%= text_field(:user, :email, size: 20) %>
+       </div>
+       <div class="form-group">
+         <%= link_to "Find Collaborator", wikis_find_collaborator_path(:wiki_id => @wiki.id, :var => @email), class: 'btn btn-warning' %>
+       </div>
+     <% end %>
+   </div>
+ </div>

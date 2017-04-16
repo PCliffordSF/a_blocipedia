@@ -1,8 +1,9 @@
 class WikisController < ApplicationController
     
+
   def index
-    @wikis = Wiki.all
-    render :index
+     @wikis = Wiki.all
+     render :index
   end
 
   def new
@@ -41,8 +42,10 @@ class WikisController < ApplicationController
 
   def update
      @wiki = Wiki.find(params[:id])
+     authorize @wiki
      @wiki.title = params[:wiki][:title]
      @wiki.body = params[:wiki][:body]
+     @wiki.private = params[:wiki][:private]
  
      if @wiki.save
        flash[:notice] = "Post was updated."
@@ -51,7 +54,6 @@ class WikisController < ApplicationController
        flash.now[:alert] = "There was an error saving the wiki. Please try again."
        render :edit
      end
-     
   end
 
   def destroy
@@ -68,5 +70,33 @@ class WikisController < ApplicationController
   def downgrade
       downgrade_users_wikis
   end
+  
+ def add_collaborator
+    @wiki = Wiki.find(params[:id])
+    @user = User.find_by email: params["email"]
+    #@user = User.where('email = ?', params["email"]).first
+    #@user = User.where(email: params['email']).first
+    if @user
+        Rails.logger.info "you have selected user"
+        Rails.logger.info @user.email
+        Rails.logger.info "You have selected wiki"
+        Rails.logger.info @wiki.title
+        @wiki.collaboratingusers << @user
+        @wiki.save
+   else
+        flash[:alert] = "\"#{params["email"]}\" isn't a valid email address... dummy"
+    end
+
+    redirect_to root_path
+ end
+ 
+#  def tester
+#     Rails.logger.info "inside tester"
+#     Rails.logger.info params["email"] 
+#     Rails.logger.info params["wiki_id"]
+#     redirect_to root_path
+#  end
+ 
+
   
 end

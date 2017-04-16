@@ -2,13 +2,25 @@ Rails.application.routes.draw do
   
   
   resources :charges, only: [:new, :create]
-  get '/users/upgrade', :controller => 'users', :action => 'upgrade'
-  get '/users/downgrade', :controller => 'users', :action => 'downgrade'
+  # get '/users/upgrade', :controller => 'users', :action => 'upgrade'
+  # get '/users/downgrade', :controller => 'users', :action => 'downgrade'
+  #post '/wikis/add_collaborator', :controller => 'wikis', :action => 'add_collaborator'
 
 
-  resources :wikis
+
+  resources :wikis do
+    member do
+      post :add_collaborator
+    end
+  end
 
   devise_for :users
+  resources :users, only: [] do
+    member do
+      put :upgrade
+      put :downgrade
+    end
+  end
   get 'welcome/index'
 
   get 'about' => 'welcome#about'

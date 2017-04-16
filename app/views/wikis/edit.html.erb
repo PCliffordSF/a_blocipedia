@@ -2,8 +2,9 @@
  
  <div class="row">
    <div class="col-md-8">
-     <%= form_for @wiki do |wiki| %>
+     <%= form_for @wiki do |f| %>
        <div class="form-group">
+<<<<<<< HEAD
         <%= wiki.label :title %>
         <%= wiki.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
        </div>
@@ -11,11 +12,20 @@
          <%= wiki.label :body %>
          <%= wiki.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki content" %>
          
+=======
+         <%= f.label :title %>
+         <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
        </div>
        <div class="form-group">
-         <%= wiki.submit "Save", class: 'btn btn-success' %>
+         <%= f.label :body %>
+         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki content" %>
+>>>>>>> test2
+       </div>
+       <div class="form-group">
+         <%= f.submit "Save", class: 'btn btn-success' %>
          <%= link_to "Exit", wikis_path, class: 'btn btn-warning' %>
        </div>
+       <%= render partial: 'form', locals: {f: f, current_user: current_user} %>
      <% end %>
    </div>
  </div>

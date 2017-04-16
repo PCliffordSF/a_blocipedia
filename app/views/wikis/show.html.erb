@@ -6,11 +6,30 @@
  </div>
  <div class="row">
    <div class="col-md-8">
+<<<<<<< HEAD
      <p><%= markdown(@wiki.body) %></p>
+=======
+     <p><%= @wiki.body %></p>
+     <% if @wiki.private == true && current_user.premium? %>
+     
+     <div class="col-md-8">
+      
+      <%= form_tag add_collaborator_wiki_path(@wiki) do  %>
+      <%= label_tag 'email', 'Add a collaborator to this wiki?' %>
+      <%= email_field_tag 'email', nil, class: 'form-control', placeholder: "Enter email address of collaborator" %>
+      <br></br>
+      <%= submit_tag 'Search for collaborator', class: 'btn btn-primary' %>
+      <% end %>
+
+      <br></br>
+      </div> <br></br>
+     <% end %>
+>>>>>>> test2
    </div>
      <div class="col-md-8">
        <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-success' %>
        <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete wiki?' } %>
        <%= link_to "Exit", root_path, class: 'btn btn-warning' %>
      </div>
+     
  </div>

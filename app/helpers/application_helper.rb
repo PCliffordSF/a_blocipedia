@@ -1,3 +1,4 @@
+
 module ApplicationHelper
   
   def markdown(text)
@@ -22,5 +23,6 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
+
 end
 

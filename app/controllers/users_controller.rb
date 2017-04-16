@@ -10,4 +10,8 @@ def upgrade
      current_user.downgrade_to_standard
      redirect_to root_path
  end
+ 
+
+ 
+
 end

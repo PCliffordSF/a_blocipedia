@@ -7,6 +7,16 @@
  <div class="row">
    <div class="col-md-8">
      <p><%= @wiki.body %></p>
+     <% @collaborators = Collaborator.where('wiki_id = ?', @wiki.id) %>
+     <% if @collaborators.length != 0 && current_user.premium? %>
+     <p>List of collaborators emails:</p>
+      <% @collaborators.each do |c| %>
+      <% @user = User.find_by id: c.user_id %>
+        <small><%= @user.email %></small>
+        <small><%= link_to "Remove Collaborator", remove_collaborator_wiki_path(@wiki), method: :delete, class: 'btn-sm btn-danger' %></small>
+        <br></br>
+      <% end %>
+     <% end %>
      <% if @wiki.private == true && current_user.premium? %>
      
      <div class="col-md-8">
@@ -15,7 +25,7 @@
       <%= label_tag 'email', 'Add a collaborator to this wiki?' %>
       <%= email_field_tag 'email', nil, class: 'form-control', placeholder: "Enter email address of collaborator" %>
       <br></br>
-      <%= submit_tag 'Search for collaborator', class: 'btn btn-primary' %>
+      <%= submit_tag 'Add the collaborator', class: 'btn btn-primary' %>
       <% end %>
 
       <br></br>

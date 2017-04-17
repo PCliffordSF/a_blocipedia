@@ -74,21 +74,35 @@ class WikisController < ApplicationController
  def add_collaborator
     @wiki = Wiki.find(params[:id])
     @user = User.find_by email: params["email"]
+    @collaborator = Collaborator.find_by user_id: @user.id
     #@user = User.where('email = ?', params["email"]).first
     #@user = User.where(email: params['email']).first
     if @user
-        Rails.logger.info "you have selected user"
-        Rails.logger.info @user.email
-        Rails.logger.info "You have selected wiki"
-        Rails.logger.info @wiki.title
-        @wiki.collaboratingusers << @user
-        @wiki.save
-   else
+        if @collaborator
+           flash[:alert] = "\"#{params["email"]}\" is already as a collaborator... dummy" 
+        else
+            @wiki.collaboratingusers << @user
+            @wiki.save
+            flash[:notice] = "\"#{params["email"]}\" has been successfully added as a collaborator"
+        end
+    else
         flash[:alert] = "\"#{params["email"]}\" isn't a valid email address... dummy"
     end
-
-    redirect_to root_path
+    redirect_to wiki_path
  end
+ 
+
+  def remove_collaborator
+    @collaborator = Collaborator.find_by wiki_id: params[:id]
+    Rails.logger.info "inside remove collaborator"
+    if @collaborator
+        @collaborator.destroy
+        flash[:alert] = "collaborator has been successfully deleted"
+   else
+        flash[:alert] = "collaborator was not deleted"
+    end
+    redirect_to wiki_path
+  end
  
 #  def tester
 #     Rails.logger.info "inside tester"

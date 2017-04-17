@@ -4,16 +4,16 @@ class CollaboratorsController < ApplicationController
     @collaborator = Collaborator.new
   end
   
-  def add
-     Rails.logger.info "INSIDE ADD"
-     
-     $collaborator = Collaborator.new
-     
-     $collaborator.user_id = params[:user_id]
-     $collaborator.wiki_id = params[:wiki_id]
-     Rails.logger.info $collaborator.save
-     flash[:notice] = "User was added as a collaborator."
-     redirect_to root_path
+  def destroy
+    @collaborator = Wiki.find(params[:id])
+     if @collaborator.destroy
+       flash[:notice] = "collaborator was deleted successfully."
+       redirect_to wiki_path
+     else
+       flash.now[:alert] = "There was an error deleting the collaborator."
+       redirect_to wiki_path
+     end
+    
   end
     
     

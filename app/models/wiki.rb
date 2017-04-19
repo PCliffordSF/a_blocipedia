@@ -9,4 +9,9 @@ class Wiki < ActiveRecord::Base
      self
   end
   
+  
+  def public?
+    !self.private
+  end
+  
 end

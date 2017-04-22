@@ -92,7 +92,6 @@ class WikisController < ApplicationController
 
   def remove_collaborator
     @collaborator = Collaborator.find_by wiki_id: params[:id]
-    Rails.logger.info "inside remove collaborator"
     if @collaborator
         @collaborator.destroy
         flash[:alert] = "collaborator has been successfully deleted"

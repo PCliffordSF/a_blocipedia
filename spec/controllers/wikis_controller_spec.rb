@@ -2,15 +2,16 @@ require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
   
-  let(:user) {User.create(email: "test@mail.com", password: "password", confirmed_at: Time.now) }
-  let(:wiki) {Wiki.create(user: user, title: "title", body: "body") }
+  let(:user) {User.create(email: "test@mail.com", password: "password", role: "standard", confirmed_at: Time.now) }
+  let(:wiki) {Wiki.create(user: user, title: "title", private: false, body: "body") }
 
 
   before :each do 
     sign_in user 
+    sign_in premium_user
   end
   
-  context "user user doing CRUD on a wiki they own" do
+  context "standard user user doing CRUD on a public wiki they own" do
     
       #########  GET SHOW  ########################
   
@@ -111,7 +112,7 @@ RSpec.describe WikisController, type: :controller do
   ################ DELETE DESTROY  ###########################3
   
   
-  describe "GET #destroy" do
+  describe "DELETE #destroy" do
     it "deletes the wiki" do
       delete :destroy, user_id: user.id, id: wiki.id 
       count = Wiki.where({id: wiki.id}).size
@@ -135,5 +136,28 @@ RSpec.describe WikisController, type: :controller do
   end
 
 end
+  
+  let(:standard_user) {User.create(email: "standard_user@mail.com", password: "password", role: "standard", confirmed_at: Time.now) }
+  let(:premium_user) {User.create(email: "premium_user@mail.com", password: "password", role: "premium", confirmed_at: Time.now) }
+  let(:private_wiki) {Wiki.create(user: premium_user, title: "private title", private: true, body: "body") }
 
+context "premium user adding and removing a collaborator to a private wiki they own" do
+  
+  describe "POST #add_collaborator " do
+    it "changes the collaborator count by one" do
+      expect {post :add_collaborator, id: private_wiki.id, email: standard_user.email }.to change(Collaborator, :count).by(1)
+      #expect (Collaborator.last.user_id).to eq(standard_user.id)
+    end
+  end
+  
+  let(:collaborator_to_delete) {Collaborator.create(user_id: standard_user.id, wiki_id: private_wiki.id) }
+    
+    describe "DELETE #remove_collaborator" do
+    it "change the collaborator count by one" do
+      expect {delete :remove_collaborator, id: private_wiki.id }.to change(Collaborator, :count).by(1)
+    end
+  end
+
+  
+end
 end

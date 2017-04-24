@@ -7,8 +7,9 @@
  <div class="row">
    <div class="col-md-8">
      <p><%= @wiki.body %></p>
-     <% @collaborators = Collaborator.where('wiki_id = ?', @wiki.id) %>
-     <% if @collaborators.length != 0 && current_user.premium? %>
+     
+     <% if show_collaborator @wiki %>
+     <% @collaborators = get_collaborators @wiki %>
      <p>List of collaborators emails:</p>
       <% @collaborators.each do |c| %>
       <% @user = User.find_by id: c.user_id %>

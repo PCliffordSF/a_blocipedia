@@ -5,7 +5,7 @@
 
      <% @wikis.each do |wiki| %>
      
-     <% if wiki.private != true || current_user.role == 'premium' %>
+     <% if index_view wiki %>
        <div class="media">
          <div class="media-body">
            <h4 class="media-heading">

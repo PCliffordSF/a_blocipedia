@@ -2,7 +2,8 @@ class WikisController < ApplicationController
     
 
   def index
-     @wikis = Wiki.all
+     @wikis = policy_scope(Wiki)
+     #@wikis = Wiki.all
      render :index
   end
 
@@ -74,11 +75,8 @@ class WikisController < ApplicationController
  def add_collaborator
     @wiki = Wiki.find(params[:id])
     @user = User.find_by email: params["email"]
-    @collaborator = Collaborator.find_by user_id: @user.id
-    #@user = User.where('email = ?', params["email"]).first
-    #@user = User.where(email: params['email']).first
     if @user
-        if @collaborator
+        if @wiki.collaboratingusers.include?(@user)
            flash[:alert] = "\"#{params["email"]}\" is already as a collaborator... dummy" 
         else
             @wiki.collaboratingusers << @user
@@ -94,7 +92,6 @@ class WikisController < ApplicationController
 
   def remove_collaborator
     @collaborator = Collaborator.find_by wiki_id: params[:id]
-    Rails.logger.info "inside remove collaborator"
     if @collaborator
         @collaborator.destroy
         flash[:alert] = "collaborator has been successfully deleted"
@@ -104,13 +101,5 @@ class WikisController < ApplicationController
     redirect_to wiki_path
   end
  
-#  def tester
-#     Rails.logger.info "inside tester"
-#     Rails.logger.info params["email"] 
-#     Rails.logger.info params["wiki_id"]
-#     redirect_to root_path
-#  end
- 
-
   
 end

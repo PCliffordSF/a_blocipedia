@@ -142,11 +142,19 @@ end
   let(:private_wiki) {Wiki.create(user: premium_user, title: "private title", private: true, body: "body") }
 
 context "premium user adding and removing a collaborator to a private wiki they own" do
+  
   describe "POST #add_collaborator " do
-    it "increases collaborator count by one" do
-      post :add_collaborator, wiki_id: private_wiki.id, user: {user_id: standard_user.id}
-      
-      expect(Collaborator.count).to_increases by(1)
+    it "changes the collaborator count by one" do
+      expect {post :add_collaborator, id: private_wiki.id, email: standard_user.email }.to change(Collaborator, :count).by(1)
+      #expect (Collaborator.last.user_id).to eq(standard_user.id)
+    end
+  end
+  
+  let(:collaborator_to_delete) {Collaborator.create(user_id: standard_user.id, wiki_id: private_wiki.id) }
+    
+    describe "DELETE #remove_collaborator" do
+    it "change the collaborator count by one" do
+      expect {delete :remove_collaborator, id: private_wiki.id }.to change(Collaborator, :count).by(1)
     end
   end
 
